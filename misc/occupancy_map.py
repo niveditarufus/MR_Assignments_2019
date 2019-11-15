@@ -19,9 +19,9 @@ for i in range(len(z)):
 		if(x[j]>z[i]+20):
 			continue
 		mapping_odds[j] = mapping_odds[j] + inv_sensor_model(z[i],x[j]) - prior
-	print(mapping_odds[i])
+	# print(mapping_odds[i])
 mapping_odds = [1-(1/(1+math.exp(ele))) for ele in mapping_odds]
-print(mapping_odds)
+# print(mapping_odds)
 plt.plot(x,mapping_odds)
 plt.show()
 
