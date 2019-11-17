@@ -10,7 +10,7 @@ def get_transformation(pt,theta,T):
     return pt
 
 
-data = [i.strip().split() for i in open("/home/nive/space/ais.informatik.uni-freiburg.de/laserscan.dat").readlines()]
+data = [i.strip().split() for i in open("./laserscan.dat").readlines()]
 data = np.asarray(data)
 data = data.ravel()
 data = [float(i) for i in data]
