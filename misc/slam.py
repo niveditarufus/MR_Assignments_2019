@@ -13,7 +13,7 @@ def read_data():
 	ids = []
 	ranges = []
 	bearings = []
-	data = [i.strip().split() for i in open("/home/nive/space/ais.informatik.uni-freiburg.de/SLAM/data/sensor_data.dat").readlines()]
+	data = [i.strip().split() for i in open("./data/sensor_data.dat").readlines()]
 	first = True
 	timestamp = 0
 
@@ -39,7 +39,7 @@ def read_data():
 def read_landmarks():
 	landmarks = dict()
 	data=[]
-	data = [i.strip().split() for i in open("/home/nive/space/ais.informatik.uni-freiburg.de/SLAM/data/world.dat").readlines()]
+	data = [i.strip().split() for i in open("./data/world.dat").readlines()]
 	for d in data:
 		landmarks[int(d[0])]=[float(d[1]), float(d[2])]
 	return landmarks
