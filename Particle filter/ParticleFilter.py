@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import random
 
 def read_data():
-	data = [i.strip().split() for i in open("/home/nive/space/ais.informatik.uni-freiburg.de/pf_framework/data/sensor_data.dat").readlines()]
+	data = [i.strip().split() for i in open("./data/sensor_data.dat").readlines()]
 	odom_data =[]
 	flag = 0
 	count =-1
@@ -30,7 +30,7 @@ def read_data():
 
 def read_landmarks():
 	data=[]
-	data = [i.strip().split() for i in open("/home/nive/space/ais.informatik.uni-freiburg.de/pf_framework/data/world.dat").readlines()]
+	data = [i.strip().split() for i in open("./data/world.dat").readlines()]
 	return data
 
 def samples_sum(mu, sigma):
