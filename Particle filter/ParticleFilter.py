@@ -61,13 +61,11 @@ def filter(observation,particles,landmarks):
 	for particle in particles:
 		expectation = math.sqrt((particle[0]-landmarks[id][1])**2 + (particle[1]-landmarks[id][2])**2)
 		likelihood = np.exp( - (observation[1] - expectation)**2 / (2 * sigma**2) )
-		# likelihood = scipy.stats.norm(expectation,sigma).pdf(observation[1])
 		weights.append(likelihood)
 	weights = np.asarray(weights)
 	weights =np.reshape(weights, (np.size(particles,0),1))
 	n = np.sum(weights)
 	weights = np.true_divide(weights,n)
-	# print(weights)
 	return weights
 def resample(weights,particles):
 	step = 1/(len(particles))
@@ -82,7 +80,6 @@ def resample(weights,particles):
 		resampled.append(particles[i])
 		start = start + step
 	resampled = np.asarray(resampled)
-	# print(resampled)
 	return resampled
 
 sensor_data = []
