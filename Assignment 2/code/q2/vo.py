@@ -27,7 +27,7 @@ def get_ground_truth():
     return np.genfromtxt(file, delimiter=' ',dtype=None)
 
 def getImages(i):
-    return cv2.imread('/home/nive/space/mr/assignment-2/q2/images/'+str(i)+'.png')
+    return cv2.imread('./sample_images/'+str(i)+'.png')
 
 def get_transformation_matrix(R,t):
     M = np.empty((4, 4))
@@ -46,19 +46,19 @@ K = np.array([[7.215377000000e+02,0.000000000000e+00,6.095593000000e+02],
               [0.000000000000e+00,7.215377000000e+02,1.728540000000e+02],
               [0.000000000000e+00,0.000000000000e+00,1.000000000000e+00]])
 
-# E, mask = cv2.findEssentialMat(p2, p1, K, cv2.RANSAC,0.999,1.0);
+E, mask = cv2.findEssentialMat(p2, p1, K, cv2.RANSAC,0.999,1.0);
 N = len(p1)
 p1new = np.ones((N,3))
 p2new = np.ones((N,3))
 p1new[:,:-1] = p1
 p2new[:,:-1] = p2
 
-F = F_from_ransac(p2new.T, p1new.T, RansacModel())
-F = F[0]
-E = np.matmul(K.T,np.matmul(F,K))
+# F = F_from_ransac(p2new.T, p1new.T, RansacModel())
+# F = F[0]
+# E = np.matmul(K.T,np.matmul(F,K))
 
 x, R, t, mask = cv2.recoverPose(E, p2, p1,K);
-MAX_FRAME 	  = 800
+MAX_FRAME 	  = 10 # images can be downloaded from many datasets availablr online, this sample contains only 10 images
 preImage   = img_2
 R_f = R
 t_f = t
@@ -75,15 +75,15 @@ for numFrame in range(1, MAX_FRAME):
     preFeature = extract_sift_keypoints(preImage)
     curImage = getImages(numFrame)
     preFeature, curFeature = featureTracking(preImage, curImage, preFeature)
-    # E, mask = cv2.findEssentialMat(curFeature, preFeature, K, cv2.RANSAC,0.999,1.0); 
+    E, mask = cv2.findEssentialMat(curFeature, preFeature, K, cv2.RANSAC,0.999,1.0); 
     N = len(preFeature)
     p1new = np.ones((N,3))
     p2new = np.ones((N,3))
     p1new[:,:-1] = preFeature
     p2new[:,:-1] = curFeature
-    F = F_from_ransac(p2new.T, p1new.T, RansacModel())
-    F = F[0]
-    E = np.matmul(K.T,np.matmul(F,K))
+    # F = F_from_ransac(p2new.T, p1new.T, RansacModel())
+    # F = F[0]
+    # E = np.matmul(K.T,np.matmul(F,K))
 
     _, R, t, mask = cv2.recoverPose(E, curFeature, preFeature, K);
     absolute_scale = Scale(ground_truth, numFrame)
@@ -100,3 +100,4 @@ for numFrame in range(1, MAX_FRAME):
 
     preImage = curImage
     preFeature = curFeature
+#for plotting follow instructions in the given pdf file.
