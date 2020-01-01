@@ -6,16 +6,6 @@ import time
 from misc_tools import *
 
 def closest_point_matching(X, P):
-  """
-  Performs closest point matching of two point sets.
-  
-  Arguments:
-  X -- reference point set
-  P -- point set to be matched with the reference
-  
-  Output:
-  P_matched -- reordered P, so that the elements in P match the elements in X
-  """
 
   
   Distances = np.Inf * np.ones([X.shape[1],X.shape[1]])
